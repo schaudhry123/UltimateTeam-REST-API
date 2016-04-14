@@ -3,7 +3,7 @@ from restapi.models import Team, Player
 
 from rest_framework import viewsets, permissions
 from restapi.serializers import PlayerSerializer, TeamSerializer, UserSerializer
-from restapi.permissions import IsOwnerOrReadOnly
+from restapi.permissions import IsOwnerOrReadOnly, IsAnonCreate
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -12,6 +12,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    permission_classes = (IsAnonCreate, )
 
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
