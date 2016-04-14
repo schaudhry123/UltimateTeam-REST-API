@@ -19,3 +19,17 @@ class Team(models.Model):
 	# Has won any titles
 	def has_won_titles(self):
 		return self.team_titles > 0
+
+class Player(models.Model):
+	player_name = models.CharField(max_length=100, null=True)
+	position = models.CharField(max_length=3, null=True)
+	team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
+	nationality = models.CharField(max_length=100, null=True)
+	player_league = models.CharField(max_length=100, null=True)
+	owner = models.ForeignKey('auth.User', related_name='players', default=0)
+
+	class Meta:
+		ordering = ["player_name"]
+
+	def __str__(self):
+		return str(self.player_name)
