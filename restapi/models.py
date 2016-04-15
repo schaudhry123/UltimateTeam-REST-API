@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Team(models.Model):
+	id = models.AutoField(primary_key=True)
 	team_name = models.CharField(max_length=100, null=True)
 	manager = models.CharField(max_length=100, null=True)
 	league = models.CharField(max_length=100, null=True)
@@ -21,6 +22,7 @@ class Team(models.Model):
 		return self.team_titles > 0
 
 class Player(models.Model):
+	id = models.AutoField(primary_key=True)
 	player_name = models.CharField(max_length=100, null=True)
 	position = models.CharField(max_length=3, null=True)
 	team = models.ForeignKey(Team, on_delete=models.CASCADE, default="", related_name='players', null=False)
