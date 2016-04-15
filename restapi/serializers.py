@@ -2,16 +2,6 @@ from rest_framework import serializers
 from restapi.models import Player, Team
 from django.contrib.auth.models import User
 
-class TeamSerializer(serializers.HyperlinkedModelSerializer):
-	owner = serializers.ReadOnlyField(source='owner.username')
-	players = serializers.StringRelatedField(many=True)
-	players_urls = serializers.HyperlinkedRelatedField(source='players', many=True, read_only=True, view_name='player-detail')
-	# players_urls = serializers.HyperlinkedRelatedField(view_name='player-list')
-
-	class Meta:
-		model = Team
-		fields = ('url', 'id', 'owner', 'team_name', 'manager', 'league', 'players', 'players_urls', 'location', 'team_titles')
-
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
 	# team = models.ForeignKey(Team, related_name='players')
@@ -21,6 +11,17 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Player
 		fields = ('url', 'id', 'owner', 'player_name', 'position', 'team', 'team_name', 'nationality', 'player_league')
+
+class TeamSerializer(serializers.HyperlinkedModelSerializer):
+	owner = serializers.ReadOnlyField(source='owner.username')
+	players = PlayerSerializer(many=True, read_only=True)
+
+	# players = serializers.StringRelatedField(many=True)
+	# players_urls = serializers.HyperlinkedRelatedField(source='players', many=True, read_only=True, view_name='player-detail')
+
+	class Meta:
+		model = Team
+		fields = ('url', 'id', 'owner', 'team_name', 'manager', 'league', 'players', 'location', 'team_titles')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 	players = serializers.HyperlinkedRelatedField(many=True, view_name='player-detail', queryset=Player.objects.all())
