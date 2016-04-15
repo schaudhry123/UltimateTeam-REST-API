@@ -5,10 +5,12 @@ from django.contrib.auth.models import User
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
 	players = serializers.StringRelatedField(many=True)
+	players_urls = serializers.HyperlinkedRelatedField(source='players', many=True, read_only=True, view_name='player-detail')
+	# players_urls = serializers.HyperlinkedRelatedField(view_name='player-list')
 
 	class Meta:
 		model = Team
-		fields = ('url', 'id', 'owner', 'team_name', 'manager', 'league', 'players', 'location', 'team_titles')
+		fields = ('url', 'id', 'owner', 'team_name', 'manager', 'league', 'players', 'players_urls', 'location', 'team_titles')
 
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
