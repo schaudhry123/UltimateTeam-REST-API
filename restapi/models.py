@@ -23,7 +23,7 @@ class Team(models.Model):
 class Player(models.Model):
 	player_name = models.CharField(max_length=100, null=True)
 	position = models.CharField(max_length=3, null=True)
-	team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
+	team = models.ForeignKey(Team, on_delete=models.CASCADE, default="", related_name='players', null=False)
 	nationality = models.CharField(max_length=100, null=True)
 	player_league = models.CharField(max_length=100, null=True)
 	owner = models.ForeignKey('auth.User', related_name='players', default=0)
