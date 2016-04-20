@@ -12,7 +12,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    permission_classes = (IsAnonCreate, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
