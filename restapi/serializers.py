@@ -10,7 +10,7 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Player
-		fields = ('url', 'id', 'owner', 'player_name', 'position', 'team', 'team_name', 'nationality', 'player_league')
+		fields = ('id', 'url', 'owner', 'player_name', 'position', 'team', 'team_name', 'nationality', 'player_league')
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
@@ -21,7 +21,7 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Team
-		fields = ('url', 'id', 'owner', 'team_name', 'manager', 'league', 'players', 'location', 'team_titles')
+		fields = ('id', 'url', 'owner', 'team_name', 'manager', 'league', 'players', 'location', 'team_titles')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 	players = serializers.HyperlinkedRelatedField(many=True, view_name='player-detail', queryset=Player.objects.all())
@@ -29,4 +29,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = User
-		fields = ('url', 'username', 'players', 'teams')
+		fields = ('id', 'url', 'username', 'players', 'teams')
