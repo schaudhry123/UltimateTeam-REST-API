@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User
-from restapi.models import Team, Player
+from restapi.models import Team, Player, User
 from rest_framework.decorators import api_view
 from rest_framework import viewsets, permissions
 from restapi.serializers import PlayerSerializer, TeamSerializer, UserSerializer
