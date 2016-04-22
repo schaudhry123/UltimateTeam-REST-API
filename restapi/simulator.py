@@ -44,6 +44,11 @@ def compare_teams(team1, team2):
 
     results = {}
 
+    if team1_goals > 4:
+        team1_goals = 4
+    if team2_goals > 4:
+        team2_goals = 4
+
     if team1_goals > team2_goals:
         results['winning_score'] = team1_goals
         results['winning_team'] = team1.name
