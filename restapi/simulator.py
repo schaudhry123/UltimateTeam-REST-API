@@ -1,4 +1,5 @@
 import math
+
 def compare_teams(team1, team2):
     result = {}
 
@@ -10,7 +11,7 @@ def compare_teams(team1, team2):
     team2_keep = 1
     for player in team1_players:
         if(player.position != 'Keeper'):
-            conversion = float(player.appearances)/max(100, float(player.goals))
+            conversion = float(player.goals)/max(1, float(player.appearances))
             spg = float(player.shots_per_game)
             team1_chance[player.name] = conversion/spg
         else:
@@ -18,7 +19,7 @@ def compare_teams(team1, team2):
             
     for player in team2_players:
         if(player.position != 'Keeper'):
-            conversion = float(player.appearances)/max(100, float(player.goals))
+            conversion = float(player.goals)/max(1, float(player.appearances))
             spg = float(player.shots_per_game)
             team2_chance[player.name] = conversion/spg
         else:
@@ -52,9 +53,9 @@ def compare_teams(team1, team2):
     else:
         results['winning_score'] = team2_goals
         results['winning_team'] = team2.name
-        results[team1.name] = two_scorers
+        results[team1.name] = one_scorers
         results['losing_score'] = team1_goals
         results['losing_team'] = team1.name
-        results[team2.name] = one_scorers
+        results[team2.name] = two_scorers
 
     return results
