@@ -10,7 +10,7 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Player
-		fields = ('id', 'url', 'owner', 'name', 'year', 'team', 'player_league', 'team_name', 'position', 'age', 'height', 'weight', 'appearances', 'starts', 'subs', 'minutes', 'goals', 'assists', 'yellow', 'red', 'shots_per_game', 'ps', 'aerials_won', 'position', 'motm', 'rating', 'skills')
+		fields = ('id', 'url', 'owner', 'name', 'year', 'team', 'player_league', 'team_name', 'position', 'age', 'height', 'weight', 'appearances', 'goals', 'assists', 'yellow', 'red', 'shots_per_game', 'ps', 'aerials_won', 'position', 'motm', 'rating', 'skills')
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
