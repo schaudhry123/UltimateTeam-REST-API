@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
-	# team = models.ForeignKey(Team, related_name='players')
+	#team = models.ForeignKey(Team, related_name='players')
 	# team = TeamSerializer(read_only=True)
-	team_name = serializers.StringRelatedField(source='team', read_only=True)
+	name = serializers.StringRelatedField(source='team', read_only=True)
 
 	class Meta:
 		model = Player
-		fields = ('id', 'url', 'owner', 'player_name', 'position', 'team', 'team_name', 'nationality', 'player_league')
+		fields = ('id', 'url', 'owner', 'year', 'player_league', 'team', 'name', 'name', 'age', 'position', 'height', 'weight', 'appearances',
+			'starts', 'subs', 'minutes', 'goals', 'assists', 'yellow', 'red', 'shots_per_game', 'ps', 'aerials_won', 'position', 'motm', 'rating', 'skills')
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.ReadOnlyField(source='owner.username')
@@ -21,7 +22,7 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Team
-		fields = ('id', 'url', 'owner', 'team_name', 'manager', 'league', 'players', 'location', 'team_titles')
+		fields = ('id', 'url', 'league', 'name','owner', 'players')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 	players = serializers.HyperlinkedRelatedField(many=True, view_name='player-detail', queryset=Player.objects.all())
@@ -29,4 +30,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = User
-		fields = ('id', 'url', 'username', 'players', 'teams')
+		fields = ('id', 'url', 'username', 'players', 'teams',)
