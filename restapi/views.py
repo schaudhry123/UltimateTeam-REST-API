@@ -37,8 +37,8 @@ def get_simulation(request, pk1, pk2):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        #serializer = UserSerializer(avg_user)
-        return Response(winning_team)
+        #serializer = ResultSerializer(avg_user)
+        return Response(serializer)
 
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
