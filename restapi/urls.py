@@ -11,5 +11,6 @@ router.register(r'users', views.UserViewSet)
 # Additionally, we include the login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^teams/getSimulation/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/$', views.get_simulation),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

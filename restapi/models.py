@@ -6,7 +6,7 @@ class Team(models.Model):
 	league = models.CharField(max_length=100, null=True)
 	name = models.CharField(max_length=100, null=True)
 
-	owner = models.ForeignKey('auth.User', related_name='teams', default=0)
+	#owner = models.ForeignKey('auth.User', related_name='teams', default=0)
 
 	class Meta:
 		ordering = ["league", "name"]
@@ -37,7 +37,7 @@ class Player(models.Model):
 	rating = models.CharField(max_length=10, null=True)
 	skills = models.CharField(max_length=20, null=True)
 
-	owner = models.ForeignKey('auth.User', related_name='players', default=0)
+	#owner = models.ForeignKey('auth.User', related_name='players', default=0)
 
 	class Meta:
 		ordering = ["name"]
