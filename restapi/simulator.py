@@ -14,17 +14,17 @@ def compare_teams(team1, team2):
         if(player.position != 'Keeper'):
             conversion = float(player.goals)/max(1, float(player.appearances))
             spg = float(player.shots_per_game)
-            team1_chance[player.name] = conversion/spg * random.uniform(0.5, 1.5)
+            team1_chance[player.name] = conversion/spg * random.uniform(0.85, 1.15)
         else:
-            team1_keep = 10.0 - random.uniform(0.5, 1.5) * float(player.rating)
+            team1_keep = 10.0 - random.uniform(0.85, 1.15) * float(player.rating)
             
     for player in team2_players:
         if(player.position != 'Keeper'):
             conversion = float(player.goals)/max(1, float(player.appearances))
             spg = float(player.shots_per_game)
-            team2_chance[player.name] = conversion/spg * random.uniform(0.5, 1.5)
+            team2_chance[player.name] = conversion/spg * random.uniform(0.85, 1.15)
         else:
-            team2_keep = 10.0 - random.uniform(0.5, 1.5) * float(player.rating)
+            team2_keep = 10.0 - random.uniform(0.85, 1.15) * float(player.rating)
  
     one_scorers = {}
     two_scorers = {}
