@@ -39,7 +39,7 @@ class Player(models.Model):
 	motm = models.CharField(max_length=3, null=True)
 	rating = models.CharField(max_length=10, null=True)
 	skills = models.CharField(max_length=20, null=True)
-	
+
 	owner = models.ForeignKey('auth.User', related_name='players', default=0)
 
 	class Meta:
