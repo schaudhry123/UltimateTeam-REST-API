@@ -5,11 +5,15 @@ class User(models.Model):
 	id = models.AutoField(primary_key=True)
 	username = models.CharField(max_length=100, null=False)
 
+	# For printing string
+	def __str__(self):
+		return str(self.username)	
+
 class Team(models.Model):
 	id = models.AutoField(primary_key=True)
 	league = models.CharField(max_length=100, null=True)
 	name = models.CharField(max_length=100, null=True)
-	owner = models.CharField(max_length=100, null=True)
+	username = models.CharField(max_length=100, null=True)
 
 	class Meta:
 		ordering = ["league", "name"]

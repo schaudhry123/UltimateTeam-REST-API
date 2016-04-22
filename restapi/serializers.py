@@ -20,7 +20,7 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Team
-		fields = ('id', 'url', 'owner', 'name', 'league', 'players')
+		fields = ('id', 'url', 'username', 'name', 'league', 'players')
 
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:

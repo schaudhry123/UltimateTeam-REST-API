@@ -1,11 +1,13 @@
 from restapi.models import Team, Player, User
 from rest_framework.decorators import api_view
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 from restapi.serializers import PlayerSerializer, TeamSerializer, UserSerializer
+from django.core import serializers
+from rest_framework.response import Response
 #from restapi.permissions import IsOwnerOrReadOnly, IsAnonCreate
 import simulator
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
     """
@@ -19,9 +21,6 @@ class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = PlayerSerializer
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
 @api_view(['GET'])
 def get_simulation(request, pk1, pk2):
     """
@@ -30,19 +29,17 @@ def get_simulation(request, pk1, pk2):
     try:
         team1 = Team.objects.get(pk=pk1)
         team2 = Team.objects.get(pk = pk2)
-        winning_team = simulator.compare_teams(base_user, roommate)
+        winning_team = simulator.compare_teams(team1, team2)
         print(winning_team)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
+        #obj_as_json = serializers.serialize("json", winning_team)
         #serializer = ResultSerializer(avg_user)
-        return Response(serializer)
+        return Response(winning_team)
 
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)

@@ -4,22 +4,25 @@ def compare_teams(team1, team2):
 
     team1_chance = {}
     team2_chance = {}
- 
-    for player in team1['players']:
-        if(player['position'] != 'Keeper'):
-            conversion = float(player['appearances'])/float(player['goals'])
-            spg = float(player['shots_per_game'])
-            team1_chance[player['name']] = conversion/spg
+    team1_players = team1.players.all()
+    team2_players = team2.players.all()
+    team1_keep = 1
+    team2_keep = 1
+    for player in team1_players:
+        if(player.position != 'Keeper'):
+            conversion = float(player.appearances)/float(player.goals)
+            spg = float(player.shots_per_game)
+            team1_chance[player.name] = conversion/spg
         else:
-            team1_keep = 10.0 - float(player['rating'])
+            team1_keep = 10.0 - float(player.rating)
             
-    for player in team2['players']:
-        if(player['position'] != 'Keeper'):
-            conversion = float(player['appearances'])/float(player['goals'])
-            spg = float(player['shots_per_game'])
-            team2_chance[player['name']] = conversion/spg
+    for player in team2_players:
+        if(player.position != 'Keeper'):
+            conversion = float(player.appearances)/float(player.goals)
+            spg = float(player.shots_per_game)
+            team2_chance[player.name] = conversion/spg
         else:
-            team2_keep = 10.0 -float(player['rating'])
+            team2_keep = 10.0 -float(player.rating)
  
     one_scorers = {}
     two_scorers = {}
@@ -41,17 +44,17 @@ def compare_teams(team1, team2):
 
     if team1_goals > team2_goals:
         results['winning_score'] = team1_goals
-        results['winning_team'] = team1['name']
-        results[team1['name']] = one_scorers
+        results['winning_team'] = team1.name
+        results[team1.name] = one_scorers
         results['losing_score'] = team2_goals
-        results['losing_team'] = team2['name']
-        results[team2['name']] = two_scorers
+        results['losing_team'] = team2.name
+        results[team2.name] = two_scorers
     else:
         results['winning_score'] = team2_goals
-        results['winning_team'] = team2['name']
-        results[team1['name']] = two_scorers
+        results['winning_team'] = team2.name
+        results[team1.name] = two_scorers
         results['losing_score'] = team1_goals
-        results['losing_team'] = team1['name']
-        results[team2['name']] = one_scorers
+        results['losing_team'] = team1.name
+        results[team2.name] = one_scorers
 
     return results
