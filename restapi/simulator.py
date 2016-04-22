@@ -10,7 +10,7 @@ def compare_teams(team1, team2):
     team2_keep = 1
     for player in team1_players:
         if(player.position != 'Keeper'):
-            conversion = float(player.appearances)/min(100, float(player.goals))
+            conversion = float(player.appearances)/max(100, float(player.goals))
             spg = float(player.shots_per_game)
             team1_chance[player.name] = conversion/spg
         else:
@@ -18,7 +18,7 @@ def compare_teams(team1, team2):
             
     for player in team2_players:
         if(player.position != 'Keeper'):
-            conversion = float(player.appearances)/min(100, float(player.goals))
+            conversion = float(player.appearances)/max(100, float(player.goals))
             spg = float(player.shots_per_game)
             team2_chance[player.name] = conversion/spg
         else:
