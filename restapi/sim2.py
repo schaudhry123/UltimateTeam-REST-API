@@ -78,9 +78,13 @@ gets the aggregate elo of a team
     aggregate elo of team
 '''
 def get_elo(team_players):
+    num_players = 0
     total_elo =0.0
     for player in team_players:
         total_elo += float(player.rating)
+        num_players += 1
+        if(num_players >= 11):
+            break
     return total_elo
 
 '''
