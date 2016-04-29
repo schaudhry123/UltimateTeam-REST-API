@@ -85,7 +85,7 @@ gets scorers for a team
 '''
 def get_scorers(players, goals):
     scorers = {}
-    pr = sorted(players, key=lambda player:players.rating)
+    pr = sort_players(players)
     for player in pr:
         if goals != 0:
             scorers[player.name] = math.floor(random.uniform(1, 3))
@@ -95,3 +95,11 @@ def get_scorers(players, goals):
         else:
             break
     return scorers
+
+def sort_players(players):
+    todos = {}
+    for player in players:
+        if player.position == 'Forward' or player.position == 'Midfielder':
+            todos[player.name] = player.rating
+    sort = sorted(todos, key=todos.get, reverse=True)
+    return sort
