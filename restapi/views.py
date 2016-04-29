@@ -6,6 +6,7 @@ from django.core import serializers
 from rest_framework.response import Response
 #from restapi.permissions import IsOwnerOrReadOnly, IsAnonCreate
 import simulator
+import sim2
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -29,7 +30,7 @@ def get_simulation(request, pk1, pk2):
     try:
         team1 = Team.objects.get(pk=pk1)
         team2 = Team.objects.get(pk = pk2)
-        winning_team = simulator.compare_teams(team1, team2)
+        winning_team = sim2.compare_teams(team1, team2)
         print(winning_team)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
