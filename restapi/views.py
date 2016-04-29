@@ -62,15 +62,15 @@ def get_pk(url):
     reverse = url[::-1]
     for c in reverse:
         if(c == '/'):
-            num_slash++
+            num_slash+=1
         if(num_slash == 1):
             start = idx
             num_slash = 2
         if(num_slash == 3):
             end = idx
             break
-        idx++
-    return int(reverse[start+1:end])
+        idx+=1
+    return int((reverse[start+1:end])[::-1])
 
 
 
