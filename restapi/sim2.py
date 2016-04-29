@@ -41,7 +41,7 @@ def compare_teams(team1, team2):
     #winners goals is goal differential plus l_goals
     w_goals = goal_diff + l_goals
 
-    if(l_goals > 5 && w_goals > 5):
+    if(l_goals > 5 and w_goals > 5):
         l_goals = 3
         w_goals = 4
 
