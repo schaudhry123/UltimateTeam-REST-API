@@ -28,9 +28,11 @@ def get_simulation(request, pk1, pk2):
     Get team simulation
     """
     try:
-        team1 = Team.objects.get(pk=pk1)
-        team2 = Team.objects.get(pk = pk2)
+        team = Team.objects.get(pk = pk1)
+        team1 = get_players(team)
+        team = Team.objects.get(pk = pk2)
         winning_team = sim2.compare_teams(team1, team2)
+        team2 = get_players(team)
         print(winning_team)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -44,3 +46,34 @@ class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+def get_players(team):
+    players = []
+    players_url = team.players.all()
+    for url in players_url:
+        pk = get_pk(url)
+        players.append(Player.objects.get(pk = pk))
+    return players
+
+def get_pk(url):
+    start = end = 0
+    num_slash = 0
+    idx = 0
+    reverse = url[::-1]
+    for c in reverse:
+        if(c == '/'):
+            num_slash++
+        if(num_slash == 1):
+            start = idx
+            num_slash = 2
+        if(num_slash == 3):
+            end = idx
+            break
+        idx++
+    return int(reverse[start+1:end])
+
+
+
+
+
+
