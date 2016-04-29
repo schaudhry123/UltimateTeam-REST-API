@@ -86,8 +86,6 @@ def get_elo(team_players):
         if(num_players >= 11):
             break
 
-    if(num_players < 10):
-        total_elo *= (11.0/float(num_players))
     return total_elo
 
 '''
