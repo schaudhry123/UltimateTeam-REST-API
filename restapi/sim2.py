@@ -89,6 +89,8 @@ def get_scorers(players, goals):
     for player in pr:
         if goals != 0:
             scorers[player.name] = math.floor(random.uniform(1, 3))
+            if(scorers[player.name] > goals):
+                scorers[player.name] = goals
             goals -= scorers[player.name]
         else:
             break
