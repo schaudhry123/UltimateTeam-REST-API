@@ -40,6 +40,8 @@ def compare_teams(team1, team2):
     l_goals = math.floor(random.expovariate(0.8))
     #winners goals is goal differential plus l_goals
     w_goals = goal_diff + l_goals
+
+    results = {}
     
     if(winner == 1):
         one_scorers = get_scorers(team1_players, l_goals)
