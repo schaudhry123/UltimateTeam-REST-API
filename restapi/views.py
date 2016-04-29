@@ -28,11 +28,11 @@ def get_simulation(request, pk1, pk2):
     Get team simulation
     """
     try:
-        team = Team.objects.get(pk = pk1)
-        team1 = get_players(team)
-        team = Team.objects.get(pk = pk2)
+        team1 = Team.objects.get(pk = pk1)
+        #team1 = get_players(team)
+        team2 = Team.objects.get(pk = pk2)
         winning_team = sim2.compare_teams(team1, team2)
-        team2 = get_players(team)
+        #team2 = get_players(team)
         print(winning_team)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
