@@ -60,6 +60,8 @@ def compare_teams(team1, team2):
         results['losing_team'] = team2.name
         results[team2.name] = two_scorers
 
+    return results
+
 
 '''
 gets the aggregate elo of a team
