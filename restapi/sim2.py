@@ -33,13 +33,18 @@ def compare_teams(team1, team2):
     goal_diff = math.floor(elo_diff*multiplier)
     
     #assuming everyone is sportsmanlike and won't go to double digits
-    if(goal_diff > 10):
-        goal_diff = 9
+    if(goal_diff > 5):
+        goal_diff = 4
     
     #the losers goals will have an exponential distribution with mean 5/4
     l_goals = math.floor(random.expovariate(0.8))
     #winners goals is goal differential plus l_goals
     w_goals = goal_diff + l_goals
+
+    if(l_goals > 5 && w_goals > 5):
+        l_goals = 3
+        w_goals = 4
+
 
     results = {}
     
